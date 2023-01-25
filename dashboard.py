@@ -1,5 +1,4 @@
 from datetime import datetime
-
 import geopandas
 import streamlit as st
 import pandas    as pd
@@ -9,6 +8,7 @@ import seaborn as sns
 import plotly.express as px
 from streamlit_folium import folium_static
 from folium.plugins   import MarkerCluster
+import sys
 
 st.set_page_config( layout='wide' )
 
@@ -268,7 +268,7 @@ def attributes_distribution(data):
 if __name__ == "__main__":
     # ETL
     # data extraction
-    path = 'datasets/kc_house_data.csv'
+    path = 'kc_house_data.csv'
     url = 'https://opendata.arcgis.com/datasets/83fc2e72903343aabff6de8cb445b81c_2.geojson'
     data = get_data( path )
     geofile = get_geofile( url )
@@ -280,7 +280,7 @@ if __name__ == "__main__":
     comercial_distribution(data)
     attributes_distribution(data)
     # loading
-    #Nothing is loading
+    # Nothing is loading
 
 
 
