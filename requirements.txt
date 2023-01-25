@@ -87,7 +87,6 @@ GDAL==3.5.3
 gensim @ file:///C:/ci/gensim_1646825438310/work
 geographiclib==2.0
 geopandas @ file:///home/conda/feedstock_root/build_artifacts/geopandas_1670698600430/work
-geopandas==0.12.2
 geopy==2.3.0
 gitdb==4.0.10
 GitPython==3.1.30
