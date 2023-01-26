@@ -38,37 +38,38 @@ def overview_data(data):
     st.title('Data Overview')
 
     if (f_zipcode != []) & (f_attributes != []):
-        data = data.loc[data['zipcode'].isin(f_zipcode), f_attributes]
+        data = data.loc[data['zipcode'].isin(f_zipcode),  f_attributes]
+        print(f_attributes)
 
     elif (f_zipcode != []) & (f_attributes == []):
         data = data.loc[data['zipcode'].isin(f_zipcode), :]
-
+        print(f_attributes)
     elif (f_zipcode == []) & (f_attributes != []):
         data = data.loc[:, f_attributes]
-
+        print(f_attributes)
     else:
         data = data.copy()
-
+        print(f_attributes)
     st.dataframe(data)
 
-    c1, c2 = st.columns((1, 1), gap="small")
+    #c1, c2 = st.columns((1, 1), gap="small")
 
-    # Average metrics
-    df1 = data[['id', 'zipcode']].groupby('zipcode').count().reset_index()
-    df2 = data[['price', 'zipcode']].groupby('zipcode').mean().reset_index()
-    df3 = data[['sqft_living', 'zipcode']].groupby('zipcode').mean().reset_index()
-    df4 = data[['price_m2', 'zipcode']].groupby('zipcode').mean().reset_index()
+    # Average values
+    #df1 = data[['id', 'zipcode']].groupby('zipcode').count().reset_index()
+    #df2 = data[['price', 'zipcode']].groupby('zipcode').mean().reset_index()
+    #df3 = data[['sqft_living', 'zipcode']].groupby('zipcode').mean().reset_index()
+    #df4 = data[['price_m2', 'zipcode']].groupby('zipcode').mean().reset_index()
 
     # merge
-    m1 = pd.merge(df1, df2, on='zipcode', how='inner')
-    m2 = pd.merge(m1, df3, on='zipcode', how='inner')
-    df = pd.merge(m2, df4, on='zipcode', how='inner')
+    #m1 = pd.merge(df1, df2, on='zipcode', how='inner')
+    #m2 = pd.merge(m1, df3, on='zipcode', how='inner')
+    #df = pd.merge(m2, df4, on='zipcode', how='inner')
 
-    df.columns = ['ZIPCODE', 'TOTAL HOUSES', 'PRICE', 'SQRT LIVING',
-                  'PRICe/M2']
+    #df.columns = ['ZIPCODE', 'TOTAL HOUSES', 'PRICE', 'SQRT LIVING',
+    #              'PRICe/M2']
 
-    c1.header('Average Values')
-    c1.dataframe(df, height=600)
+    #c1.header('Average Values')
+    #c1.dataframe(df, height=600)
 
     # Statistic Descriptive
     num_attributes = data.select_dtypes(include=['int64', 'float64'])
@@ -83,8 +84,8 @@ def overview_data(data):
 
     df1.columns = ['attributes', 'max', 'min', 'mean', 'median', 'std']
 
-    c2.header('Descriptive Analysis')
-    c2.dataframe(df1, height=600)
+    st.header('Descriptive Analysis')
+    st.dataframe(df1, height=600)
     return None
 
 def portfolio_density(data, geofile):
